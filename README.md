@@ -22,7 +22,7 @@ http://docs.docker.io/en/latest/use/working_with_volumes/#creating-and-mounting-
 
 For a more complete backup strategy built on top of docker-backup, look at https://github.com/discordianfish/docker-lloyd.
 
-To run docker-backup itself as a Container, you need to bind-mount the Docker socket and Docker's data directory:
+To run docker-backup itself as a Container, you need to bind-mount the Docker socket, Docker's data directory and point docker-backup via the `-addr` flag to the location of docker.sock within the container:
 
     $ docker run -v /var/run/docker.sock:/docker.sock \
          -v /var/lib/docker/vfs/dir:/var/lib/docker/vfs/dir fish/docker-backup -addr /docker.dock ...
