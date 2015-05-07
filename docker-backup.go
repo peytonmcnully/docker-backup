@@ -7,7 +7,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/discordianfish/docker-backup/backup"
+	"github.com/docker-infra/docker-backup/backup"
 )
 
 const (
