@@ -225,6 +225,8 @@ func (b *ContainerBackup) request(method, path string, body io.Reader) (*http.Re
 		return nil, err
 	}
 
+	req.Header.Set("Content-Type", "application/json")
+
 	conn, err := net.Dial(b.proto, b.addr)
 	if err != nil {
 		return nil, err
