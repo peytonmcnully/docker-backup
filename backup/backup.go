@@ -49,7 +49,6 @@ func NewBackup(addr, proto string, rw io.ReadWriteSeeker) *ContainerBackup {
 }
 
 func (b *ContainerBackup) Store(containerId string) (uint, error) {
-	tw := tar.NewWriter(b.rw)
 	container, _, err := b.getContainer(containerId)
 	if err != nil {
 		return 0, err
@@ -64,10 +63,15 @@ func (b *ContainerBackup) Store(containerId string) (uint, error) {
 		return 0, errors.New("Only containers with one data volume container are support right now")
 	}
 
-	volumeContainer, volumeContainerJson, err := b.getContainer(container.HostConfig.VolumesFrom[0])
+	return b.VolumeContainerStore(container.HostConfig.VolumesFrom[0])
+}
+
+func (b *ContainerBackup) VolumeContainerStore(containerId string) (uint, error) {
+	volumeContainer, volumeContainerJson, err := b.getContainer(containerId)
 	if err != nil {
 		return 0, err
 	}
+	tw := tar.NewWriter(b.rw)
 	th := &tar.Header{
 		Name:       volumeContainerFilename,
 		Size:       int64(len(volumeContainerJson)),
