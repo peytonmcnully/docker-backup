@@ -20,15 +20,11 @@ import (
 	"github.com/moby/moby/runconfig"
 )
 
-// type container struct {
-// 	Config     runconfig.Config
-// 	HostConfig runconfig.HostConfig
-// 	Name       string            `json:"Name"`
-// 	Volumes    map[string]string `json:"Volumes"`
-// }
-
 type container struct {
-	runconfig.ContainerDecoder
+	Config     runconfig.ContainerDecoder.Config
+	HostConfig runconfig.ContainerDecoder.HostConfig
+	Name       string            `json:"Name"`
+	Volumes    map[string]string `json:"Volumes"`
 }
 
 type containerResponse struct {
