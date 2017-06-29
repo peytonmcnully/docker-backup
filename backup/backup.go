@@ -21,8 +21,8 @@ import (
 )
 
 type container struct {
-	Config     runconfig.DecodeContainerConfig
-	HostConfig runconfig.DecodeHostConfig
+	Config     runconfig.Config
+	HostConfig runconfig.HostConfig
 	Name       string            `json:"Name"`
 	Volumes    map[string]string `json:"Volumes"`
 }
